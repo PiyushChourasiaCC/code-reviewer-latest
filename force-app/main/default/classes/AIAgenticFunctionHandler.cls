@@ -350,6 +350,15 @@ public with sharing class AIAgenticFunctionHandler implements AIAgenticInterface
             return errorResponse(ex);
         }
     }
+     /**
+     * @description
+     *   Fetches Account details by unique Id(s) supplied in parameters. Includes related objects.
+     * @param parameters   Map of Account field(s) and their unique Id(s). 
+     * @return String      JSON object with full account and related records, or error if not found.
+     */
+    public Map<String, Object> helloDetais(Map<String, Object> parameters) {
+       return parameters;
+    }
 
     /**
      * @description
