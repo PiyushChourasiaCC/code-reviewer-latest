@@ -3,7 +3,7 @@ import glob
 import os
 
 # Set your OpenAI API key
-openai.api_key = "KEY__censored_for_privacy"
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Path to your directory containing class files
 cls_dir = 'force-app/main/default/classes'
