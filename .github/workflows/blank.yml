@@ -1,61 +1,20 @@
-name: Build, Test, Lint, Security, and Code Review
+name: AI Code Review
 
-on:
-  push:
-    branches:
-      - '**'
-  pull_request:
-    branches:
-      - '**'
+on: [push, pull_request]
 
 jobs:
-  build-and-test:
+  review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Build and Test
-        run: echo "Your build and test goes here..."
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Lint
-        run: echo "Your linting goes here..."
-
-  security-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Security scan
-        run: echo "Your security scan goes here..."
-
-  code-review:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
-      - name: Install OpenAI
-        run: pip install openai
-      - name: Run code reviewer
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install openai python-dotenv
+      - name: Run AI review script
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python openai_pp.py
-
-  deploy-staging:
-    needs: [build-and-test, lint, security-scan, code-review]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Deployment to Staging
-        run: echo "Your deployment to staging script goes here..."
-
-  deploy-production:
-    needs: deploy-staging
-    runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
-    steps:
-      - uses: actions/checkout@v4
-      - name: Deployment to Production
-        run: echo "Your deployment to production script goes here..."
