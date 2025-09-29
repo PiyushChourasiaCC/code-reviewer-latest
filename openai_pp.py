@@ -2,6 +2,7 @@ import openai
 import glob
 import os
 
+print("OPENAI_API_KEY is:", os.getenv("OPENAI_API_KEY"))
 # Set your OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
