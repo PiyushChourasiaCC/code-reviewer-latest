@@ -41,7 +41,7 @@ jobs:
       - name: Install OpenAI
         run: pip install openai
       - name: Run code reviewer
-        run: python code-reviewer.py
+        run: python openai_pp.py
 
   deploy-staging:
     needs: [build-and-test, lint, security-scan, code-review]
